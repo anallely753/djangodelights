@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>Inventory | Home</title>
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-primary text-center my-2">Inventory</h1>
+
+<div class="container">
+    <h2 class="text-info my-3">Update ingredient: {{ingredient.name}}</h2>
+    <form method="post" class="flex-form">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Update" />
+    </form>
+</div>
+{% endblock %}

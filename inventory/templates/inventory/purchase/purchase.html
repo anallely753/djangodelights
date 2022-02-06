@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>Inventory | Home</title>
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-primary text-center my-2">Inventory</h1>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="text-info my-3">List of Purchases</h2>
+        <a href="{% url 'purchasecreate' %}" class="btn btn-info text-white">Create</a>
+    </div>
+    <table class="table inventory-table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Menu Item</th>
+                <th>Timestamp</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for purchase in object_list %}
+            <tr>
+                <td>
+                    {{ purchase.menu_item.title }}
+                </td>
+                <td class="price">{{ purchase.timestamp }}</td>
+                <td>{{purchase.menu_item.price}}</td>
+                <td>
+                    <a class="btn btn-dark ml-2" href="{% url 'purchaseupdate' purchase.id %}">Update</a>
+                    <a class="btn btn-danger " href="{% url 'purchasedelete' purchase.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        
+    </table>
+
+    
+
+</div>
+{% endblock %}

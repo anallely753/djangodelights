@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>Inventory | Home</title>
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-primary text-center my-2">Inventory</h1>
+
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2 class="text-info my-3">List of Menu Items</h2>
+        <a href="{% url 'menuitemcreate' %}" class="btn btn-info text-white">Create</a>
+    </div>
+    <table class="table inventory-table table-bordered table-striped table-hover">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Ingredients</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for menuitem in object_list %}
+            <tr>
+                <td>
+                    {{ menuitem.title }}
+                </td>
+                <td class="price">{{ menuitem.price|stringformat:".1f" }}</td>
+                <td>
+                    <ul class="menu-item-ingredients">
+                        {% for recipe_requirement in menuitem.reciperequirement_set.all %}
+                        <li>{{ recipe_requirement.quantity }} {{recipe_requirement.ingredient.unit }} {{ recipe_requirement.ingredient.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+                <td>
+                    <a class="btn btn-dark ml-2" href="{% url 'menuitemupdate' menuitem.id %}">Update</a>
+                    <a class="btn btn-danger " href="{% url 'menuitemdelete' menuitem.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

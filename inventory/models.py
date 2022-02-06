@@ -7,6 +7,9 @@ class Ingredient(models.Model):
     quantity = models.FloatField(default=0)
     unit = models.CharField(max_length=50)
     unit_price = models.FloatField(default=0)
+    
+    def get_absolute_url(self):
+        return "/ingredient/list"
 
 class MenuItem(models.Model):
     title = models.CharField(max_length=100, unique=True)

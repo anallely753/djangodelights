@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block head %}
+<title>Inventory | Home</title>
+{% endblock %}
+
+
+{% block content %}
+<h1 class="text-primary text-center my-2">Inventory</h1>
+
+<div class="container">
+    <h2 class="text-info my-3">Add new ingredient</h2>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Save">
+    </form>
+</div>
+{% endblock %}
